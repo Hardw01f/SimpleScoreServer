@@ -1,0 +1,2 @@
+# SimpleScoreServer
+SimpleScoreServer for Hardening
