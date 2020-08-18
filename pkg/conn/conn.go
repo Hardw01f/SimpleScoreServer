@@ -68,7 +68,10 @@ func AddScore() echo.HandlerFunc {
 			db.Model(&score).Where("server = ?", score.Server).Update("score", originScore.Score+score.Score)
 		}
 
-		return c.JSON(http.StatusOK, s)
+		var returnScore Score
+		db.Where("server = ?", s.Server).Find(&returnScore)
+
+		return c.JSON(http.StatusOK, returnScore)
 
 	}
 }

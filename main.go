@@ -11,8 +11,8 @@ import (
 func main() {
 	e := echo.New()
 
-	e.GET("/test", func(c echo.Context) error {
-		return c.String(http.StatusOK, "Hello, World!")
+	e.GET("/health", func(c echo.Context) error {
+		return c.String(http.StatusOK, "Health Active\n")
 	})
 	e.GET("/scoreinit", conn.ScoreInit())
 	e.POST("/addscore", conn.AddScore())
