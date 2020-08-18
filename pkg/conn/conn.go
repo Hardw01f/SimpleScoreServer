@@ -32,7 +32,7 @@ func ScoreInit() echo.HandlerFunc {
 
 		db.Set("gorm:table_options", "ENGINE=InnoDB")
 		db.AutoMigrate(&Score{})
-		return c.String(http.StatusOK, "Migrate Successful")
+		return c.String(http.StatusOK, "Migrate Successful\n")
 	}
 }
 
@@ -68,7 +68,10 @@ func AddScore() echo.HandlerFunc {
 			db.Model(&score).Where("server = ?", score.Server).Update("score", originScore.Score+score.Score)
 		}
 
-		return c.JSON(http.StatusOK, s)
+		var returnScore Score
+		db.Where("server = ?", s.Server).Find(&returnScore)
+
+		return c.JSON(http.StatusOK, returnScore)
 
 	}
 }
